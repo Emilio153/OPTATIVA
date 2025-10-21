@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "6f2d82d5-eec2-4a9f-87ad-d4147ae9add5",
+		"name": "dawpool",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44783839",
+		"_collection_link": "https://emilio-2932839.postman.co/workspace/Emilio's-Workspace~9c8a3b1b-62e6-49c3-808e-b722243fe2a0/collection/44783839-6f2d82d5-eec2-4a9f-87ad-d4147ae9add5?action=share&source=collection_link&creator=44783839"
+	},
+	"item": [
+		{
+			"name": "Borrar por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/tareas/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tareas por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/tareas/7",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todas las tareas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idTarea\": 1,\r\n  \"titulo\": \"Título modificado\",\r\n  \"descripcion\": \"Descripción modificada\",\r\n  \"fechaVencimiento\": \"2025-10-30\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/tareas",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tareas en proceso",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/tareas/enProceso",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"enProceso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tareas vencidas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/tareas/vencidas",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"vencidas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tareas no vencidas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/tareas/noVvencidas",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"noVvencidas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tareas completadas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/tareas/completada",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"completada"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear tarea",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \r\n        \"titulo\": \"Diseño de interfaz WEB\",\r\n        \"descripcion\": \"Prototipo para la nueva aplicación WEB\",\r\n        \"fechaCreacion\": \"2025-09-10\",\r\n        \"fechaVencimiento\": \"2025-09-22\",\r\n        \"estado\": null\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/tareas",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar  tarea",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"idTarea\": 1,\r\n  \"titulo\": \"Título modificado\",\r\n  \"descripcion\": \"Descripción modificada\",\r\n  \"fechaVencimiento\": \"2025-10-30\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "localhost:8091/tareas/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar por titulo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"titulo\": \"Tirar basura\",\r\n        \"descripcion\": \"LLevar basura punto limpio\",\r\n        \"fechaCreacion\": \"2025-09-01\",\r\n        \"fechaVencimiento\": \"2025-10-25\",\r\n        \"estado\": \"PENDIENTE\"\r\n    }"
+				},
+				"url": {
+					"raw": "localhost:8091/tareas/buscar?titulo=modificado",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"buscar"
+					],
+					"query": [
+						{
+							"key": "titulo",
+							"value": "modificado"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Completar tarea",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"titulo\": \"Tirar basura\",\r\n        \"descripcion\": \"LLevar basura punto limpio\",\r\n        \"fechaCreacion\": \"2025-09-01\",\r\n        \"fechaVencimiento\": \"2025-10-25\",\r\n        \"estado\": \"PENDIENTE\"\r\n    }"
+				},
+				"url": {
+					"raw": "localhost:8091/tareas/5/completar",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"5",
+						"completar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Iniciar una tarea",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"titulo\": \"Tirar basura\",\r\n        \"descripcion\": \"LLevar basura punto limpio\",\r\n        \"fechaCreacion\": \"2025-09-01\",\r\n        \"fechaVencimiento\": \"2025-10-25\",\r\n        \"estado\": \"PENDIENTE\"\r\n    }"
+				},
+				"url": {
+					"raw": "localhost:8091/tareas/8/iniciar",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"tareas",
+						"8",
+						"iniciar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
