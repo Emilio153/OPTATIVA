@@ -1,8 +1,9 @@
 package com.daw.percistence.entities;
 
+
+
 import java.time.LocalDate;
 
-import com.daw.persistence.entities.Estado;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
