@@ -15,9 +15,9 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
-      - db
+      - db2
     environment:
-      PMA_HOST: db
+      PMA_HOST: db2
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
       MYSQL_ROOT_PASSWORD: root
@@ -25,6 +25,6 @@ services:
     ports:
       - 8093:80
     depends_on:
-      - db
+      - db2
 volumes:
   dbdata:

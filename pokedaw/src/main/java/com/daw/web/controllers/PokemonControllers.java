@@ -19,8 +19,8 @@ public class PokemonControllers {
 private PokemonService pokemonService;
 
 @GetMapping
-public ResponseEntity<List<Pokemon>> list(){
-	return ResponseEntity.ok(this.pokemonService.findAll());
+public ResponseEntity<Object> list(){
+	return  ResponseEntity.ok(this.pokemonService.findAll());
 
 }
 }
