@@ -17,7 +17,7 @@ services:
     links:
       - db
     environment:
-      PMA_HOST: db2
+      PMA_HOST: db
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
       MYSQL_ROOT_PASSWORD: root
