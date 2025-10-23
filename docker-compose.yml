@@ -15,7 +15,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
-      - db2
+      - db
     environment:
       PMA_HOST: db2
       PMA_PORT: 3306
@@ -25,6 +25,6 @@ services:
     ports:
       - 8093:80
     depends_on:
-      - db2
+      - db
 volumes:
   dbdata:
