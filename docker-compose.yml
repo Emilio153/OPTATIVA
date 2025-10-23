@@ -23,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     restart: always
     ports:
-      - 8094:80
+      - 8092:80
     depends_on:
       - db
 volumes:
