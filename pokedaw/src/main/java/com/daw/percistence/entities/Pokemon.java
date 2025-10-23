@@ -37,4 +37,12 @@ public class Pokemon {
 	private LocalDate fechaCaptura;
 	@Enumerated(EnumType.STRING)
 	private Pokeball capturado;
+	
+    public Pokemon(int numeroPokedex, String nombre, Tipo tipo1, Tipo tipo2) {
+        this.numeroPokedex = numeroPokedex;
+        this.nombre = nombre;
+        this.tipo1 = tipo1;
+        this.tipo2 = (tipo2 == null || tipo1 == tipo2) ? Tipo.NINGUNO : tipo2;
+    }
 }
+
