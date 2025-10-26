@@ -11,11 +11,19 @@ import com.daw.percistence.entities.Pokeball;
 import com.daw.percistence.entities.Pokemon;
 import com.daw.percistence.entities.Tipo;
 import com.daw.percistence.repositories.PokemonRepository;
+import com.daw.services.Exceptions.PokemonExceptions;
+import com.daw.services.Exceptions.PokemonNotFoundExceptions;
 
 
 @Service
 public class PokemonService {
 
+		// findAll
+		// findById
+		// save (crear y actualizar)
+		// deleteById
+		// existsById (nos devuelve true si existe la tarea con esa ID)
+	
     @Autowired
     private PokemonRepository pokemonRepository;
 
@@ -23,8 +31,11 @@ public class PokemonService {
         return pokemonRepository.findAll();
     }
 
-    public Optional<Pokemon> findById(int id) {
-        return pokemonRepository.findById(id);
+    public Pokemon findById(int id) {
+    	if(!this.pokemonRepository.existsById(id)){
+    		throw new PokemonNotFoundExceptions("El id" + id + "no existe");
+    	}
+        return pokemonRepository.findById(id).get();
     }
 
     public Pokemon create(Pokemon pokemon) {
@@ -41,24 +52,27 @@ public class PokemonService {
         return pokemonRepository.save(pokemon);
     }
 
-    public Pokemon update(Pokemon pokemon) {
-        // Solo permite actualizar tipo1/tipo2
-        Optional<Pokemon> existing = pokemonRepository.findById(pokemon.getId());
-        if (existing.isPresent()) {
-            Pokemon p = existing.get();
-            if (pokemon.getTipo1() != p.getTipo2()) {
-                p.setTipo1(pokemon.getTipo1());
-            }
-            if (pokemon.getTipo2() != p.getTipo1()) {
-                p.setTipo2(pokemon.getTipo2());
-            }
-            if (p.getTipo1() == p.getTipo2()) {
-                p.setTipo2(Tipo.NINGUNO);
-            }
-            return pokemonRepository.save(p);
+    public Pokemon update(Pokemon pokemon, int id) {
+       
+    		Pokemon p = pokemonRepository.findById(id).get();
+    			
+    		if (pokemon.getId() == id) {
+          throw new PokemonExceptions(String.format("El ID del body (%d) y el ID del path (%d) no coinciden",pokemon.getId(), id));
+        	}
+        if (!this.pokemonRepository.existsById(id)) {
+            throw new PokemonNotFoundExceptions("El Pokemon con ID" + id + " no existe");
         }
-        return null;
-    }
+        
+        if (pokemon.getTipo2() != p.getTipo1()) {
+            p.setTipo2(pokemon.getTipo2());
+        }
+
+        if (p.getTipo2() == null) {
+            p.setTipo2(Tipo.NINGUNO);
+        }
+         return pokemonRepository.save(p);
+        }
+    
 
     public void delete(int id) {
         pokemonRepository.deleteById(id);
@@ -72,7 +86,7 @@ public class PokemonService {
         return pokemonRepository.findByFechaCapturaBetween(start, end);
     }
 
-    public List<Pokemon> findByTipo(Tipo tipo) {
+    public List<Pokemon> findByTipo1OrTipo2(Tipo tipo) {
         return pokemonRepository.findByTipo1OrTipo2(tipo, tipo);
     }
 }
