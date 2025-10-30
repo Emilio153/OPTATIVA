@@ -56,14 +56,14 @@ public class PokemonControllers {
     		}
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Pokemon pokemon) {
+    /*@PutMapping("/{id}")
+    public ResponseEntity<?> modificarTipo(@PathVariable int id, @RequestBody Pokemon pokemon) {
         try {
-        	return ResponseEntity.ok(this.pokemonService.update(pokemon, id));
+        	return ResponseEntity.ok(this.pokemonService.modificarTipo(pokemon, id));
         }catch(PokemonExceptions ex) {
         	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
-    }
+    }*/
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable int id) {
@@ -83,14 +83,32 @@ public class PokemonControllers {
     }
 
     @GetMapping("/fecha")
-    public ResponseEntity<?> findByFechaCapturaBetween(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end) {
-        return ResponseEntity.ok(pokemonService.findByFechaCapturaBetween(start, end));
+    public ResponseEntity<?> findByFechaCapturaBetween(@RequestParam  LocalDate start,@RequestParam  LocalDate end) {
+        try {
+    			return ResponseEntity.ok(pokemonService.findByFechaCapturaBetween(start, end));
+        }catch(PokemonExceptions ex) { 	
+        		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        }
+        
     }
 
     @GetMapping("/tipo/{tipo}")
     public ResponseEntity<?> findByTipo1OrTipo2(@PathVariable Tipo tipo) {
         return ResponseEntity.ok(pokemonService.findByTipo1OrTipo2(tipo));
     }
+
+    
+    @PutMapping("/{id}/tipo")
+    public ResponseEntity<?> modificarTipo(@PathVariable int id,@RequestParam String tipo1, @RequestParam(required = false) String tipo2){
+    		try {
+    			return ResponseEntity.ok(this.pokemonService.cambiarTipo(id,tipo1,tipo2));
+    		}catch(PokemonExceptions ex) {
+    			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    		}catch(PokemonNotFoundExceptions ex) {
+    			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    		}
+    }
+    
+ 
+    
 }

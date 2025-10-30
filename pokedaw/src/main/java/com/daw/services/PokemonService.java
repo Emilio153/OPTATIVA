@@ -39,7 +39,7 @@ public class PokemonService {
     }
 
     public Pokemon create(Pokemon pokemon) {
-        // Validaciones reglas de negocio
+        
         if (pokemon.getTipo2() == null || pokemon.getTipo1() == pokemon.getTipo2()) {
             pokemon.setTipo2(Tipo.NINGUNO);
         }
@@ -52,25 +52,28 @@ public class PokemonService {
         return pokemonRepository.save(pokemon);
     }
 
-    public Pokemon update(Pokemon pokemon, int id) {
+    public Pokemon cambiarTipo(int id, String tipo1,String tipo2) {
        
-    		Pokemon p = pokemonRepository.findById(id).get();
-    			
-    		if (pokemon.getId() == id) {
-          throw new PokemonExceptions(String.format("El ID del body (%d) y el ID del path (%d) no coinciden",pokemon.getId(), id));
-        	}
-        if (!this.pokemonRepository.existsById(id)) {
-            throw new PokemonNotFoundExceptions("El Pokemon con ID" + id + " no existe");
-        }
-        
-        if (pokemon.getTipo2() != p.getTipo1()) {
-            p.setTipo2(pokemon.getTipo2());
-        }
-
-        if (p.getTipo2() == null) {
-            p.setTipo2(Tipo.NINGUNO);
-        }
-         return pokemonRepository.save(p);
+    		try {
+    			Tipo t1 = Tipo.valueOf(tipo1.toUpperCase());
+    			Tipo t2;
+    			if(tipo2 != null) {
+    				t2 = Tipo.valueOf(tipo2.toUpperCase());
+    			}else {
+    				t2 = Tipo.NINGUNO;
+    			}
+    			if(t1.equals(t2)) {
+    				throw new PokemonExceptions("Los tipos no pueden coincidir");
+    			}
+    			Pokemon pokemonBD = this.findById(id);
+    			pokemonBD.setTipo1(t1);
+    			pokemonBD.setTipo2(t2);
+    			return this.pokemonRepository.save(pokemonBD);
+    		}catch(IllegalArgumentException ex) {
+    			throw new PokemonExceptions("El tipo indicado no es valido");
+    		}
+    
+    		
         }
     
 
